@@ -11,7 +11,6 @@ import itertools
 from wand.image import Image as wand_image
 import wand
 import pendulum
-import cssutils
 import shutil
 
 # Global Variables:
