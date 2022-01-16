@@ -1,4 +1,8 @@
 import os
+# from dotenv import dotenv_values
+from dotenv import load_dotenv
+from pathlib import Path
+import os
 from pathlib import Path
 from pathlib import PurePath
 from pathlib import PosixPath
@@ -7,16 +11,40 @@ import itertools
 from wand.image import Image as wand_image
 import wand
 import pendulum
+import shutil
 
+# Global Variables:
+load_dotenv()
+env_path = Path('.')/'.env'
+load_dotenv(dotenv_path=env_path)
+WEBSITE_PATH = os.getenv("WEBSITE_PATH")
+print('WEBSITE_PATH: ' + str(WEBSITE_PATH))
+# art_gallery_path = '/var/www/musimatic/images/ArtGallery'
+art_gallery_path = str(WEBSITE_PATH) + str("/images/ArtGallery")
+WEBSITE_ADDRESS = os.getenv("WEBSITE_ADDRESS")
+print('WEBSITE_ADDRESS: ' + str(WEBSITE_ADDRESS))
+WEBSITE_FULL_ADDRESS = os.getenv("WEBSITE_FULL_ADDRESS")
+print('WEBSITE_FULL_ADDRESS: ' + str(WEBSITE_FULL_ADDRESS))
+PROJECT_DIRECTORY = os.getenv("PROJECT_DIRECTORY")
+print('PROJECT_DIRECTORY: ' + str(PROJECT_DIRECTORY))
+
+def create_art_gallery():
+    art_gallery_path_exists = Path(art_gallery_path).exists()
+    if not art_gallery_path_exists:
+        print('art_gallery_path is false: art gallery directory does NOT exist')
+        print('\n\n')
+        print('Creating "/images/ArtGallery" directory')
+        # https://csatlas.com/python-create-directory/
+        Path(art_gallery_path).mkdir()
+    os.chdir(art_gallery_path)
 
 def create_thumbnails():
     print('CALLING create_thumbnails() FUNCTION...')
-    art_gallery_path = '/var/www/musimatic/images/ArtGallery'
-    os.chdir(art_gallery_path)
     picture_directories = list(filter(os.path.isdir, os.listdir(art_gallery_path)))
     for directory in picture_directories:
         print('Checking for thumbnails directory')
-        thumbs_path = str('/var/www/musimatic/images/ArtGallery/' + str(directory) + '/thumbs')
+        # thumbs_path = str('/var/www/musimatic/images/ArtGallery/' + str(directory) + '/thumbs')
+        thumbs_path = str(str(art_gallery_path) + "/" + str(directory) + '/thumbs')
         print('thumbs_path: ' + str(thumbs_path))
         # Check if a thumbnails directory exist
         thumbs_path_exists = Path(thumbs_path).exists()
@@ -62,12 +90,12 @@ def create_thumbnails():
                         
 def create_thumbnails_gifs():
     print('CALLING create_thumbnails() FUNCTION...')
-    art_gallery_path = '/var/www/musimatic/images/ArtGallery'
     os.chdir(art_gallery_path)
     picture_directories = list(filter(os.path.isdir, os.listdir(art_gallery_path)))
     for directory in picture_directories:
         print('Checking for thumbnails directory')
-        thumbs_path = str('/var/www/musimatic/images/ArtGallery/' + str(directory) + '/thumbs')
+        # thumbs_path = str('/var/www/musimatic/images/ArtGallery/' + str(directory) + '/thumbs')
+        thumbs_path = str(str(art_gallery_path) + "/" + str(directory) + '/thumbs')
         print('thumbs_path: ' + str(thumbs_path))
         # Check if a thumbnails directory exist
         thumbs_path_exists = Path(thumbs_path).exists()
@@ -105,8 +133,26 @@ def create_thumbnails_gifs():
 
                 
 def main():
+    # Create CSS style sheet using project's example:
+    # https://stackoverflow.com/questions/55600606/how-can-i-create-a-css-file-in-python
+    # with open('WEBSITE_PATH' + '/css/artgallery.css', 'w') as stylesheet:
+        # stylesheet.write(cssTextDecoded)
+    # https://www.geeksforgeeks.org/python-copy-contents-of-one-file-to-another-file/
+    # Copy over the 'artgallery.css' file from the project to the user's '/css/artgallery.css' file using 'WEBSITE_PATH"
+    css_file_path = str(WEBSITE_PATH + '/css/artgallery.css')
+    shutil.copyfile(str(PROJECT_DIRECTORY) + '/artgallery.css', css_file_path)
+
+    # Create JS script for art gallery page using project's example:
+    js_file_path = str(WEBSITE_PATH + '/js/artgallery.js')
+    shutil.copyfile(str(PROJECT_DIRECTORY) + '/artgallery.js', js_file_path)
+    
+    # Create favicon:
+    favicon_file_path = str(WEBSITE_PATH + '/favicon/artpalette.ico')
+    shutil.copyfile(str(PROJECT_DIRECTORY) + '/artpalette.ico', favicon_file_path)
+    
     print('CALLING main() FUNCTION...')
-    with open('/var/www/musimatic/pythonprojectwebsites/ArtGallery/artgallery.html', 'w') as f:
+    # with open('/var/www/musimatic/pythonprojectwebsites/ArtGallery/artgallery.html', 'w') as f:    
+    with open(str(WEBSITE_PATH) + '/artgallery.html', 'w') as f:
         f.write('<!DOCTYPE html>')
         f.write('<html>')
         f.write('<head>')
@@ -121,15 +167,17 @@ def main():
         print('CREATING LEFT MENU')
         f.write('<div id="left_menu">')
         f.write('<h1>Art Gallery</h1>')
-        f.write('<a href="http://www.musimatic.xyz">BACK TO HOMEPAGE</a>')
+        # f.write('<a href="http://www.musimatic.xyz">BACK TO HOMEPAGE</a>')
+        f.write('<a href="' + str(WEBSITE_FULL_ADDRESS) + '">BACK TO HOMEPAGE</a>')
         current_date_eastern = pendulum.now('America/New_York').format('dddd, MMMM D, YYYY')
         current_time_eastern = pendulum.now('America/New_York').format('hh:mm:ss A')        
         f.write('<p>Last Time Updated:</p>')
         f.write('<p>' + str(current_date_eastern) + ' at ' + str(current_time_eastern) + ' EDT</p>')
-        f.write('<a href="https://git.musimatic.xyz/ArtGalleryCreator/tree/">Source Code Link</a>')
+        # f.write('<a href="https://git.musimatic.xyz/ArtGalleryCreator/tree/">Source Code Link</a>')
+        f.write('<a href="https://github.com/SamuelBanya/ArtGalleryCreator2">Source Code Link</a>')
         f.write('<br />')
         f.write('<h2>Sections</h2>')
-        art_gallery_path = '/var/www/musimatic/images/ArtGallery'
+        # art_gallery_path = '/var/www/musimatic/images/ArtGallery'
         os.chdir(art_gallery_path)
         picture_directories = sorted(filter(os.path.isdir, os.listdir(art_gallery_path)))
         for directory in picture_directories:
@@ -163,22 +211,26 @@ def main():
                 current_filename = PosixPath(picture_path).name
                 current_stem = PosixPath(picture_path).stem
                 current_parent = PosixPath(picture_path).parent
-                regular_image_version = str(picture_path).replace('/var/www/musimatic/', 'https://musimatic.xyz/')
+                # regular_image_version = str(picture_path).replace('/var/www/musimatic/', 'https://musimatic.xyz/')
+                regular_image_version = str(picture_path).replace(str(WEBSITE_PATH + '/'), str(WEBSITE_ADDRESS + '/'))
                 thumb_image_version = str(str(current_parent) + '/thumbs/thumb_' + current_filename)
-                thumb_image_version = str(thumb_image_version).replace('/var/www/musimatic/', 'https://musimatic.xyz/')
-                print('thumb_image_version: ' + str(thumb_image_version))                
+                # thumb_image_version = str(thumb_image_version).replace('/var/www/musimatic/', 'https://musimatic.xyz/')
+                thumb_image_version = str(thumb_image_version).replace(str(WEBSITE_PATH + '/'), str(WEBSITE_ADDRESS + '/'))
+                print('thumb_image_version: ' + str(thumb_image_version))
                 picture_img_tag = str('<a data-fancybox="gallery" href="' + str(regular_image_version) + '" data-fancybox="' + str(current_filename) + '" data-caption="' + str(current_filename) + '"><img src="' + str(thumb_image_version) + '"/></a>')
                 f.write(picture_img_tag)
         # Sealing off right side of page's div tag for the image gallery portion:
         f.write('</div>')
         f.write('<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>')
-        f.write('<script type="text/javascript" src="https://musimatic.xyz/js/artgallery.js"></script>')
+        # f.write('<script type="text/javascript" src="https://musimatic.xyz/js/artgallery.js"></script>')
+        f.write('<script type="text/javascript" ' + 'src="' + str(WEBSITE_ADDRESS) + '/js/artgallery.js"></script>')
         f.write('</body>')
         f.write('</html>')
         print('ART GALLERY COMPLETE!')
 
         
 if __name__ == '__main__':
+    create_art_gallery()
     create_thumbnails()
     # create_thumbnails_gifs()
     main()
