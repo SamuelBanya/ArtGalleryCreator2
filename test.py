@@ -23,8 +23,10 @@ print('WEBSITE_PATH: ' + str(WEBSITE_PATH))
 art_gallery_path = str(WEBSITE_PATH) + str("/images/ArtGallery")
 WEBSITE_ADDRESS = os.getenv("WEBSITE_ADDRESS")
 print('WEBSITE_ADDRESS: ' + str(WEBSITE_ADDRESS))
-WEBSITE_FULL_ADDRESS="https://www.sambanya.com"
+WEBSITE_FULL_ADDRESS = os.getenv("WEBSITE_FULL_ADDRESS")
 print('WEBSITE_FULL_ADDRESS: ' + str(WEBSITE_FULL_ADDRESS))
+PROJECT_DIRECTORY = os.getenv("PROJECT_DIRECTORY")
+print('PROJECT_DIRECTORY: ' + str(PROJECT_DIRECTORY))
 
 def create_art_gallery():
     art_gallery_path_exists = Path(art_gallery_path).exists()
@@ -138,15 +140,15 @@ def main():
     # https://www.geeksforgeeks.org/python-copy-contents-of-one-file-to-another-file/
     # Copy over the 'artgallery.css' file from the project to the user's '/css/artgallery.css' file using 'WEBSITE_PATH"
     css_file_path = str(WEBSITE_PATH + '/css/artgallery.css')
-    shutil.copyfile('artgallery.css', css_file_path)
+    shutil.copyfile(str(PROJECT_DIRECTORY) + '/artgallery.css', css_file_path)
 
     # Create JS script for art gallery page using project's example:
     js_file_path = str(WEBSITE_PATH + '/js/artgallery.js')
-    shutil.copyfile('artgallery.js', js_file_path)
+    shutil.copyfile(str(PROJECT_DIRECTORY) + '/artgallery.js', js_file_path)
     
     # Create favicon:
     favicon_file_path = str(WEBSITE_PATH + '/favicon/artpalette.ico')
-    shutil.copyfile('favicon/artpalette.ico', favicon_file_path)
+    shutil.copyfile(str(PROJECT_DIRECTORY) + '/artpalette.ico', favicon_file_path)
     
     print('CALLING main() FUNCTION...')
     # with open('/var/www/musimatic/pythonprojectwebsites/ArtGallery/artgallery.html', 'w') as f:    
