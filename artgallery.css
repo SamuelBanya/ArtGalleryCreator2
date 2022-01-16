@@ -1,0 +1,97 @@
+/* 
+   References:
+   - https://ghanhass.github.io/myfiddle/336
+   - https://codepen.io/eHtmlu/pen/BaodGVp
+   - https://www.quackit.com/html/html_editors/scratchpad/?example=/css/grid/examples/photo_gallery_auto-fill_evenly_sized_images
+*/
+
+/*
+
+.page_grid {
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: 1fr 1fr;
+    grind-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    padding: 25px;
+}
+.art_grid {
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grind-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    padding: 25px;
+}
+
+.art_grid_item {
+    border: 1px solid black;
+    background-color: white;
+    padding: 5px;
+    text-align: center;
+}
+
+img {
+    width: 250px;
+    height: 200px;
+    border-radius: 8px;
+}
+
+h3 {
+    display: inline;
+}
+
+#page_headers {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+*/
+#left_menu {
+    float: left;
+    position: fixed;
+    width: 30%;
+}
+
+#right_art_gallery {
+    float: right;
+    width: 70%;
+}
+
+
+img {
+    padding: 5px;
+    background: white;
+    border: 2px solid #BBB;
+    margin: 7px 14px 7px 0;
+    width: 160px;
+}
+
+img:hover {
+    border: 2px solid red;
+}
+
+body {
+    background-color: black;
+}
+
+h1 {
+    color: white;
+}
+
+h2 {
+    color: white;
+}
+
+p {
+    color: white
+}
+
+a {
+    color: yellow
+}
+
+a:hover {
+    color: red;
+}
