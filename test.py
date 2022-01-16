@@ -152,7 +152,7 @@ def main():
     
     print('CALLING main() FUNCTION...')
     # with open('/var/www/musimatic/pythonprojectwebsites/ArtGallery/artgallery.html', 'w') as f:    
-    with open('WEBSITE_PATH' + '/artgallery.html', 'w') as f:
+    with open(str(WEBSITE_PATH) + '/artgallery.html', 'w') as f:
         f.write('<!DOCTYPE html>')
         f.write('<html>')
         f.write('<head>')
