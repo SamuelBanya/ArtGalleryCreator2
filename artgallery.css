@@ -5,49 +5,6 @@
    - https://www.quackit.com/html/html_editors/scratchpad/?example=/css/grid/examples/photo_gallery_auto-fill_evenly_sized_images
 */
 
-/*
-
-.page_grid {
-    display: grid;
-    grid-gap: 15px;
-    grid-template-columns: 1fr 1fr;
-    grind-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    padding: 25px;
-}
-.art_grid {
-    display: grid;
-    grid-gap: 15px;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grind-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    padding: 25px;
-}
-
-.art_grid_item {
-    border: 1px solid black;
-    background-color: white;
-    padding: 5px;
-    text-align: center;
-}
-
-img {
-    width: 250px;
-    height: 200px;
-    border-radius: 8px;
-}
-
-h3 {
-    display: inline;
-}
-
-#page_headers {
-    text-align: center;
-}
-
-h2 {
-    text-align: center;
-}
-
-*/
 #left_menu {
     float: left;
     position: fixed;
@@ -59,8 +16,7 @@ h2 {
     width: 70%;
 }
 
-
-img {
+#right_art_gallery img {
     padding: 5px;
     background: white;
     border: 2px solid #BBB;
@@ -68,7 +24,7 @@ img {
     width: 160px;
 }
 
-img:hover {
+#right_art_gallery img:hover {
     border: 2px solid red;
 }
 
