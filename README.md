@@ -5,6 +5,14 @@ This is an attempt to make it make this project a bit more management with an '.
 
 Feel free to utilize this for your website, but DO modify the '.env' file accordingly to suit your 'nginx' based website.
 
+To be on the safe side, within your '/var/www/yourwebsite' directory on your site, you should create the following empty directories:
+- css    
+- favicon
+- images 
+- js
+
+NOTE: Under 'images', also create another subdirectory called 'ArtGallery'.
+
 # Installation Instructions
 Make sure you are using an 'nginx' based website on any desired VPS of your choice (Digital Ocean, Vultr, etc.)
 
