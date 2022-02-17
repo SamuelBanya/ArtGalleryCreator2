@@ -6,13 +6,14 @@
 */
 
 #left_menu {
-    background-color: hotpink;
-    overflow: auto;
+    float: left;
+    position: fixed;
+    width: 30%;
 }
 
 #right_art_gallery {
-    background-color: lightblue;
-    overflow: auto;
+    float: right;
+    width: 70%;
 }
 
 #right_art_gallery img {
@@ -28,14 +29,7 @@
 }
 
 body {
-    display: grid;
-    grid-template-columns: 3fr 7fr;
-    grid-template-rows: 1fr;
-    gap: 0.5rem;
-}
-
-html, body {
-    height: calc(100vh - 1rem); /* margins btw */
+    background-color: black;
 }
 
 h1 {
