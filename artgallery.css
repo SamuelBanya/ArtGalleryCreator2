@@ -8,11 +8,13 @@
 #left_menu {
     background-color: hotpink;
     overflow: auto;
+    text-align: center;
 }
 
 #right_art_gallery {
     background-color: lightblue;
     overflow: auto;
+    text-align: center;    
 }
 
 #right_art_gallery img {
