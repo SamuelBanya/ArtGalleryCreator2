@@ -179,7 +179,9 @@ def main():
         f.write('<h2>Sections</h2>')
         # art_gallery_path = '/var/www/musimatic/images/ArtGallery'
         os.chdir(art_gallery_path)
-        picture_directories = sorted(filter(os.path.isdir, os.listdir(art_gallery_path)))
+        # Adding revision so that latest artwork shows up on top of gallery page:
+        # https://docs.python.org/3/howto/sorting.html
+        picture_directories = sorted(filter(os.path.isdir, os.listdir(art_gallery_path)), reverse=True)
         for directory in picture_directories:
             picture_directory_anchor = str('<a href="#' + str(directory) + '">' + str(directory) + '</a>')
             f.write(picture_directory_anchor)
